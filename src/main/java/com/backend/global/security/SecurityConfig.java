@@ -1,9 +1,13 @@
 package com.backend.global.security;
 
+import com.backend.global.security.service.OAuth2UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,11 +29,15 @@ import com.backend.global.app.AppConfig;
 @EnableWebSecurity
 public class SecurityConfig {
 
+  @Lazy
+  @Autowired
+  private OAuth2UserService OAuth2UserService;
+
   @Bean
   public SecurityFilterChain baseSecurityFilterChain(HttpSecurity http) throws Exception {
     http
         .authorizeHttpRequests(authorize -> authorize
-            .requestMatchers("/", "/index", "/home", "/css/**", "/js/**", "/images/**", "/webjars/**", "/favicon.ico").permitAll()
+            .requestMatchers("/","/member/join", "/member/login", "/index", "/home", "/css/**", "/js/**", "/images/**", "/webjars/**", "/favicon.ico").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/*/posts/{id:\\d+}").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/*/posts").permitAll()
             .requestMatchers("/api/*/**").authenticated()
@@ -42,11 +50,16 @@ public class SecurityConfig {
                 .loginProcessingUrl("/member/login")
                 .defaultSuccessUrl("/")
                 .permitAll()
-        ).logout(logout -> logout
-                    .logoutUrl("/member/logout")
-                    .logoutSuccessUrl("/")
+        ).oauth2Login(oauth2 -> oauth2
+                    .loginPage("/member/login")
+                    .defaultSuccessUrl("/")
+                    .userInfoEndpoint(userInfo -> userInfo.userService(OAuth2UserService))
                     .permitAll()
-            ).cors(cors -> cors.configurationSource(corsConfigurationSource()));
+        ).logout(logout -> logout
+                .logoutUrl("/member/logout")
+                .logoutSuccessUrl("/")
+                .permitAll()
+        ).cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
     return http.build();
   }

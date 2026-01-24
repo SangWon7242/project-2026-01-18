@@ -49,6 +49,7 @@ dependencies {
 	annotationProcessor("com.querydsl:querydsl-apt:$queryDslVersion:jakarta")
 	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 	annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 
 	// P6Spy 의존성 추가
 	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0")
