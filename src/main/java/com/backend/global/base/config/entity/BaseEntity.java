@@ -1,4 +1,4 @@
-package com.backend.base.config.entity;
+package com.backend.global.base.config.entity;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;

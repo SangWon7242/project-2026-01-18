@@ -40,12 +40,12 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
     String oauthId = oAuth2User.getName();
     String oauthType = userRequest.getClientRegistration().getRegistrationId().toUpperCase();
 
-    log.info("OAuth2 로그인 요청: type={}, id={}, attributes={}", oauthType, oauthId, attributes);
-
-
     switch (oauthType) {
       case "KAKAO" -> {
         return kakaologin(oauthType, oauthId, attributes, userNameAttributeName);
+      }
+      case "GOOGLE" -> {
+        return googlelogin(String.valueOf(oauthType), String.valueOf(oauthId), attributes, userNameAttributeName);
       }
       default -> throw new OAuthTypeMatchNotFoundException();
     }
@@ -80,7 +80,24 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
     return new MemberContext(member, authorities, attributes, userNameAttributeName);
   }
 
-  private boolean isNew(String oAuthType, String oAuthId) {
-    throw new UnsupportedOperationException("use emailKey-based lookup instead");
+  private OAuth2User googlelogin(String oauthType, String oauthId, Map attributes, String userNameAttributeName) {
+    String email = (String) attributes.get("email");
+    String username = "%s_%s".formatted(oauthType, oauthId);
+
+    Member member = memberRepository.findByEmail(email).orElse(null);
+
+    if (member == null) {
+      member = Member.builder()
+              .email(email)
+              .username(username)
+              .password("")
+              .build();
+
+      memberRepository.save(member);
+    }
+
+      List<GrantedAuthority> authorities = new ArrayList<>();
+      authorities.add(new SimpleGrantedAuthority("member"));
+      return new MemberContext(member, authorities, attributes, userNameAttributeName);
   }
 }

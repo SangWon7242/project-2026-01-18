@@ -2,7 +2,7 @@ package com.backend.base.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.backend.base.config.entity.BaseEntity;
+import com.backend.global.base.config.entity.BaseEntity;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;

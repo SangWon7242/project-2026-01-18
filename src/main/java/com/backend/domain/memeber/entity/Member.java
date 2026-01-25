@@ -1,6 +1,6 @@
 package com.backend.domain.memeber.entity;
 
-import com.backend.base.config.entity.BaseEntity;
+import com.backend.global.base.config.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;

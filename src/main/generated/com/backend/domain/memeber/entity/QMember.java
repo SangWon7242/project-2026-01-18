@@ -19,7 +19,7 @@ public class QMember extends EntityPathBase<Member> {
 
     public static final QMember member = new QMember("member1");
 
-    public final com.backend.base.config.entity.QBaseEntity _super = new com.backend.base.config.entity.QBaseEntity(this);
+    public final com.backend.global.base.config.entity.QBaseEntity _super = new com.backend.global.base.config.entity.QBaseEntity(this);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createDate = _super.createDate;
