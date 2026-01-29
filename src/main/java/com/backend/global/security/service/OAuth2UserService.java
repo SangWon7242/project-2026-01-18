@@ -57,9 +57,9 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
     String email = "%s@kakao.com".formatted(oauthId);
     String username = "%s_%s".formatted(oauthType, oauthId);
 
-    Map attributesKakaoAcount = (Map) attributes.get("kakao_account");
-    if ((boolean) attributesKakaoAcount.get("has_email")) {
-      email = (String) attributesKakaoAcount.get("email");
+    Map attributesKakaoAccount = (Map) attributes.get("kakao_account");
+    if ((boolean) attributesKakaoAccount.get("has_email")) {
+      email = (String) attributesKakaoAccount.get("email");
     }
 
     Member member = memberRepository.findByEmail(email).orElse(null);

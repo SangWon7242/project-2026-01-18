@@ -1,12 +1,20 @@
-<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<html layout:decorate="~{layout/default_layout.html}">
+<body>
+<section class="mypage-section" layout:fragment="content">
+    <h1 class="text-2xl font-bold">마이페이지</h1>
 
-<h1 class="text-2xl font-bold">마이페이지</h1>
-
-<div class="flex gap-2">
-    <div>
+    <div class="flex gap-2">
+        <div class="avatar avatar-online avatar-placeholder"></div>
         <div>
-            <span class="text-xl" th:text="|이메일 : ${member.email}|"></span>
+            <div>
+                <span class="text-xl" th:text="|닉네임 : ${#authentication.principal.username}|"></span>
+            </div>
         </div>
     </div>
-</div>
+    <div>
+        <a th:href="@{/member/modify}" class="btn btn-primary">회원정보 수정</a>
+        <a th:href="@{/}">홈으로</a>
+    </div>
+</section>
+</body>
+</html>

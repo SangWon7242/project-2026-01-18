@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,5 +76,9 @@ public class MemberService implements UserDetailsService {
     // SELECT COUNT(*) FROM `member`;
     public long count() {
         return memberRepository.count();
+    }
+
+    public void modify(Member member) {
+        memberRepository.save(member);
     }
 }
