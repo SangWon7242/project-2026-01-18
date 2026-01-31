@@ -49,10 +49,11 @@ public class SecurityConfig {
                 .loginPage("/member/login") //
                 .loginProcessingUrl("/member/login")
                 .defaultSuccessUrl("/member/loginsuccess")
+                .failureUrl("/member/loginfail")
                 .permitAll()
         ).oauth2Login(oauth2 -> oauth2
                     .loginPage("/member/login")
-                    .defaultSuccessUrl("/")
+                    .defaultSuccessUrl("/member/loginsuccess")
                     .userInfoEndpoint(userInfo -> userInfo.userService(OAuth2UserService))
                     .permitAll()
         ).logout(logout -> logout

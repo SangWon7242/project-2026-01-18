@@ -54,6 +54,9 @@ public class MemberController {
     @GetMapping("/loginsuccess")
     public String loginsuccess() { return "member/loginsuccess";}
 
+    @GetMapping("/loginfail")
+    public String loginfail() { return "member/loginfail";}
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
     public String showProfile() {
