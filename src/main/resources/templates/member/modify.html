@@ -1,23 +1,35 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<body>
-<section class="modify-section" layout:fragment="content">
-    <form th:action="@{/member/modify}" method="POST" enctype="multipart/form-data">
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <title>회원정보 수정</title>
+  </head>
+  <body>
+    <section class="modify-section">
+      <form
+        th:action="@{/member/modify}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
         <fieldset class="fieldset">
-            <legend class="fieldset-legend">회원수정</legend>
-            <label class="input validator">
-                <span>닉네임</span>
-                <input
-                        type="text"
-                        name="username"
-                        required
-                        placeholder="닉네임을 입력해주세요."/>
-            </label>
-            <div>
-                <button type="submit" class="btn btn-neutral">수정</button>
-            </div>
+          <legend class="fieldset-legend">회원수정</legend>
+          <label class="input validator">
+            <span>닉네임</span>
+            <input
+              type="text"
+              name="username"
+              required
+              placeholder="닉네임을 입력해주세요."
+            />
+          </label>
+          <div>
+            <button type="submit" class="btn btn-neutral">수정</button>
+          </div>
         </fieldset>
-    </form>
-</section>
-</body>
+      </form>
+    </section>
+  </body>
 </html>

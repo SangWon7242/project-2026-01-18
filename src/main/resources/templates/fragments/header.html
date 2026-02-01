@@ -1,28 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <th:block th:fragment="head-extras">
-        <!-- 페이지별 head 요소 (메타 태그, 스타일, 스크립트 등) -->
+      <!-- 페이지별 head 요소 (메타 태그, 스타일, 스크립트 등) -->
     </th:block>
-</head>
-<body>
-    <header th:fragment="headerFragment">
-        <nav>
-            <a th:href="@{/}">홈으로</a>
-            <a th:href="@{/posts/list}">게시물 리스트</a>
-            <a th:href="@{/review/list}">리뷰 리스트</a>
-            <a th:href="@{/member/join}">회원가입</a>
-            <div sec:authorize="isAuthenticated()">
-                <a th:href="@{/member/logout}">로그아웃</a>
-                <a sec:authentication="name"></a>
-                <a th:href="@{/member/profile}">마이페이지</a>
-            </div>
-            <div sec:authorize="isAnonymous()">
-                <a th:href="@{/member/login}">로그인</a>
-            </div>
-            <!-- 필요에 따라 더 많은 내비게이션 링크를 추가하세요 -->
+  </head>
+  <body>
+    <header
+      class="navbar border-b border-gray-200"
+      th:fragment="headerFragment"
+    >
+      <div class="container mx-auto h-[80px] flex justify-between">
+        <div class="logo-box">
+          <a th:href="@{/}" class="flex h-full items-center text-2xl font-bold"
+            >사이트 로고</a
+          >
+        </div>
+        <nav class="menu-box">
+          <ul class="flex h-full gap-4 items-center">
+            <li>
+              <a th:href="@{/posts/list}">게시물 리스트</a>
+            </li>
+            <li>
+              <a th:href="@{/review/list}">리뷰 리스트</a>
+            </li>
+            <li sec:authorize="isAnonymous()">
+              <a th:href="@{/member/join}">회원가입</a>
+            </li>
+            <li sec:authorize="isAnonymous()">
+              <a th:href="@{/member/login}">로그인</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+              <a th:href="@{/member/logout}">로그아웃</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+              <a th:href="@{/member/profile}">마이페이지</a>
+            </li>
+          </ul>
+          <!-- 필요에 따라 더 많은 내비게이션 링크를 추가하세요 -->
         </nav>
-        <h1>Welcome to My Application</h1>
+      </div>
     </header>
-</body>
+  </body>
 </html>
