@@ -27,7 +27,7 @@
               required
               placeholder="이메일을 입력해주세요."
               title="input email"
-              name="username"
+              name="email"
             />
           </label>
         </fieldset>
@@ -61,10 +61,10 @@
 
     <script>
       function LoginForm__submit(form) {
-        form.username.value = form.username.value.trim();
-        if (form.username.value.length === 0) {
+        form.email.value = form.email.value.trim();
+        if (form.email.value.length === 0) {
           alert("이메일을 입력해주세요.");
-          form.username.focus();
+          form.email.focus();
           return;
         }
 

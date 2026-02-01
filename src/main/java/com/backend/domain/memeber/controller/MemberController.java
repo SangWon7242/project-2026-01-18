@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -36,20 +37,14 @@ public class MemberController {
 
         Member member = memberService.join(memberJoinForm);
 
-        try {
-            req.login(email, password); // 로그인 처리
-            System.out.println("로그인 성공");
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        }
-
-        return "redirect:/";
+        return "redirect:/member/joinsuccess";
     }
 
     @GetMapping("/joinOldmember")
-    public String joinOldmember() {
-        return "member/joinOldmember";
-    }
+    public String joinOldmember() { return "member/joinOldmember"; }
+
+    @GetMapping("/joinsuccess")
+    public String joinsuccess() { return "member/joinsuccess"; }
 
     @GetMapping("/login")
     public String login() {
@@ -57,14 +52,16 @@ public class MemberController {
     }
 
     @GetMapping("/loginsuccess")
-    public String loginsuccess() { return "member/loginsuccess";}
+    public String loginsuccess() { return "member/loginsuccess"; }
 
     @GetMapping("/loginfail")
     public String loginfail() { return "member/loginfail";}
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
-    public String showProfile() {
+    public String showProfile(@AuthenticationPrincipal MemberContext memberContext, Model model) {
+        Member member = memberService.getMemberByEmail(memberContext.getEmail());
+        model.addAttribute("member", member);
         return "member/profile";
     }
 
@@ -77,7 +74,7 @@ public class MemberController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify")
     public String Modify(@AuthenticationPrincipal MemberContext memberContext, @RequestParam("username") String  username) {
-        Member member = memberService.getMemberById(memberContext.getId());
+        Member member = memberService.getMemberByEmail( memberContext.getEmail());
 
         member.setUsername(username);
 

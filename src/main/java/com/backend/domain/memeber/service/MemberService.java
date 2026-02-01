@@ -3,6 +3,7 @@ package com.backend.domain.memeber.service;
 import com.backend.domain.memeber.entity.Member;
 import com.backend.domain.memeber.form.MemberJoinForm;
 import com.backend.domain.memeber.repository.MemberRepository;
+import com.backend.global.security.dto.MemberContext;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -57,7 +58,7 @@ public class MemberService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("member"));
 
-        return new User(member.getEmail(), member.getPassword(), authorities);
+        return new MemberContext(member, authorities);
     }
 
     public Member join(String username, String password, String email) {
