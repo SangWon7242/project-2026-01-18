@@ -1,15 +1,22 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
     <title>리뷰 상세</title>
-</head>
-<body>
-<section>
-    <h2 th:text="${review.content}">게시물 제목</h2>
-    <p><strong>ID:</strong> <span th:text="${review.id}">1</span></p>
-    <p><strong>내용:</strong> <span th:text="${review.content}">리뷰 내용이 여기에 표시됩니다.</span></p>
-    <p><strong>평점:</strong> <span th:text="${review.score}"></span></p>
-    <a th:href="@{/review/list}">목록으로 돌아가기</a>
-</section>
-</body>
+  </head>
+  <body>
+    <section>
+      <h2 th:text="${review.content}">게시물 제목</h2>
+      <p><strong>ID:</strong> <span th:text="${review.id}">1</span></p>
+      <p>
+        <strong>내용:</strong>
+        <span th:text="${review.content}">리뷰 내용이 여기에 표시됩니다.</span>
+      </p>
+      <p><strong>평점:</strong> <span th:text="${review.score}"></span></p>
+      <a th:href="@{/review/list}">목록으로 돌아가기</a>
+    </section>
+  </body>
 </html>

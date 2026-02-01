@@ -1,15 +1,26 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<body>
-<section>
-    <h1>리뷰 목록</h1>
-    <p>이 페이지는 리뷰 목록을 표시합니다.</p>
-    <ul>
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <title>리뷰 목록</title>
+  </head>
+  <body>
+    <section>
+      <h1>리뷰 목록</h1>
+      <p>이 페이지는 리뷰 목록을 표시합니다.</p>
+      <ul>
         <li th:each="review : ${review}">
-            <a th:href="@{/review/{id}(id=${review.id})}" th:text="${review.content}">리뷰 제목</a>
+          <a
+            th:href="@{/review/{id}(id=${review.id})}"
+            th:text="${review.content}"
+            >리뷰 제목</a
+          >
         </li>
-    </ul>
-    <a th:href="@{/review/write}">리뷰작성</a>
-</section>
-</body>
+      </ul>
+      <a th:href="@{/review/write}">리뷰작성</a>
+    </section>
+  </body>
 </html>

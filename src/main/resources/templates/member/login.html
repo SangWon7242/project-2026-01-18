@@ -1,64 +1,82 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<body>
-<section class="login-section" layout:fragment="content">
-    <h1 class="text-2xl font-bold">로그인</h1>
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
+    <title>로그인</title>
+  </head>
+  <body>
+    <section class="login-section">
+      <h1 class="text-2xl font-bold">로그인</h1>
 
-    <form th:action method="POST" onsubmit="LoginForm__submit(this); return false;">
+      <form
+        th:action
+        method="POST"
+        onsubmit="
+          LoginForm__submit(this);
+          return false;
+        "
+      >
         <fieldset class="fieldset">
-            <legend class="fieldset-legend">이메일</legend>
-            <label class="input validator">
-                <input
-                        type="email"
-                        required
-                        placeholder="이메일을 입력해주세요."
-                        title="input email"
-                        name="username"
-                />
-            </label>
+          <legend class="fieldset-legend">이메일</legend>
+          <label class="input validator">
+            <input
+              type="email"
+              required
+              placeholder="이메일을 입력해주세요."
+              title="input email"
+              name="username"
+            />
+          </label>
         </fieldset>
         <fieldset class="fieldset">
-            <legend class="fieldset-legend">비밀번호</legend>
-            <label class="input validator">
-                <input
-                        type="password"
-                        required
-                        placeholder="비밀번호를 입력해주세요."
-                        title="input password"
-                        name="password"
-                />
-            </label>
+          <legend class="fieldset-legend">비밀번호</legend>
+          <label class="input validator">
+            <input
+              type="password"
+              required
+              placeholder="비밀번호를 입력해주세요."
+              title="input password"
+              name="password"
+            />
+          </label>
         </fieldset>
         <div>
-            <button type="submit" class="btn btn-neutral">로그인</button>
+          <button type="submit" class="btn btn-neutral">로그인</button>
         </div>
         <div>
-            <a href="/oauth2/authorization/kakao" class="btn btn-secondary">카카오 로그인</a>
+          <a href="/oauth2/authorization/kakao" class="btn btn-secondary"
+            >카카오 로그인</a
+          >
         </div>
         <div>
-            <a href="/oauth2/authorization/google" class="btn btn-secondary">구글 로그인</a>
+          <a href="/oauth2/authorization/google" class="btn btn-secondary"
+            >구글 로그인</a
+          >
         </div>
-    </form>
-</section>
+      </form>
+    </section>
 
-<script>
-    function LoginForm__submit(form) {
-      form.username.value = form.username.value.trim();
-      if(form.username.value.length === 0) {
-        alert("이메일을 입력해주세요.");
-        form.username.focus();
-        return;
+    <script>
+      function LoginForm__submit(form) {
+        form.username.value = form.username.value.trim();
+        if (form.username.value.length === 0) {
+          alert("이메일을 입력해주세요.");
+          form.username.focus();
+          return;
+        }
+
+        form.password.value = form.password.value.trim();
+        if (form.password.value.length === 0) {
+          alert("비밀번호를 입력해주세요.");
+          form.password.focus();
+          return;
+        }
+
+        form.submit();
       }
-
-      form.password.value = form.password.value.trim();
-      if(form.password.value.length === 0) {
-        alert("비밀번호를 입력해주세요.");
-        form.password.focus();
-        return;
-      }
-
-      form.submit();
-    }
-</script>
-</body>
+    </script>
+  </body>
 </html>

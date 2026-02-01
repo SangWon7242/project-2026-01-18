@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}">
-<head>
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/default_layout :: layout(~{::title}, ~{::section})}"
+>
+  <head>
     <title>메인</title>
-</head>
-<body>
-    <section>
-        <h1>메인 페이지 입니다.</h1>
+  </head>
+  <body>
+    <section class="flex h-[calc(100vh-160px)] items-center justify-center">
+      <h1>메인 페이지 입니다.</h1>
     </section>
-    <div>
-        [[${param.errorMsg}]]
-    </div>
-</body>
+    <div>[[${param.errorMsg}]]</div>
+  </body>
 </html>
